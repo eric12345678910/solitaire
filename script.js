@@ -28,7 +28,6 @@ let fullDeck = [
 
 console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
 
-
 // Load after dom
 document.addEventListener('DOMContentLoaded', () => {
     // Set up the structure of the game
@@ -45,8 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let clubStack = [];
     let diamondStack = [];
 
+    let stock = [];
 
-    let activeCard = [];
     // Deal The Cards
+
+    document.addEventListener('click', (id) => {
+        alert('New Deck!')
+    });
+    let shuffle = document.getElementById('shuffle');
 
 })
