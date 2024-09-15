@@ -28,25 +28,18 @@ let fullDeck = [
 
 console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
 
+// Insert function to add elements to html
+function insert(obj){
+    let col1 = document.getElementById('col1');
+    let newCol1 = document.createElement('li');
+    newCol1.textContent = fullDeck.filter(card => card.loc === 'col1');
+    console.log('newCol1: ', newCol1);
+}
+
 // Load after dom
 document.addEventListener('DOMContentLoaded', () => {
-    // Set up the structure of the game
-    let col1 = [];
-    let col2 = [];
-    let col3 = [];
-    let col4 = [];
-    let col5 = [];
-    let col6 = [];
-    let col7 = [];
 
-    let spadeStack = [];
-    let heartStack = [];
-    let clubStack = [];
-    let diamondStack = [];
-
-    let stock = [];
-
-    // Deal The Cards
+    // Deal a new game
 
     document.addEventListener('click', (id) => {
         //alert('New Deck!');
@@ -85,24 +78,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col5';
             }
-            if(i >= 15 && i <= 21){
+            if(i >= 15 && i <= 20){
                 console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col6';
             }
-            if(i >= 22 && i <= 28){
+            if(i >= 21 && i <= 27){
                 console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col7';
             }
-            else if(i >= 29){
+            else if(i >= 28){
                 fullDeck[numbers[i]].loc = 'stock';
             }
-
         }
 
+        // Check card distribution
+        let locCounts = fullDeck.reduce((counts, card) => {
+            counts[card.loc] = (counts[card.loc] || 0) + 1;
+            return counts;
+        }, {});
 
+        console.log('locCounts: ', locCounts);
 
+        insert(fullDeck)
 
         console.log('fullDeck final: ', fullDeck);
+
 });
 
     let shuffle = document.getElementById('shuffle');
