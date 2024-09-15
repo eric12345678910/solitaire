@@ -49,8 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Deal The Cards
 
     document.addEventListener('click', (id) => {
-        alert('New Deck!')
-    });
-    let shuffle = document.getElementById('shuffle');
+        alert('New Deck!');
+        function shuffle(arr){
+            for( let i = arr.length -1; i > 0; i--){
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+        let numbers = [...Array(53).keys()]; // Create an array [0, 1, 2, ..., 52]
+        shuffle(numbers);
+        console.log(numbers);
 
+
+    });
+
+    let shuffle = document.getElementById('shuffle');
 })
