@@ -29,4 +29,24 @@ let fullDeck = [
 console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
 
 
+// Load after dom
+document.addEventListener('DOMContentLoaded', () => {
+    // Set up the structure of the game
+    let col1 = [];
+    let col2 = [];
+    let col3 = [];
+    let col4 = [];
+    let col5 = [];
+    let col6 = [];
+    let col7 = [];
 
+    let spadeStack = [];
+    let heartStack = [];
+    let clubStack = [];
+    let diamondStack = [];
+
+
+    let activeCard = [];
+    // Deal The Cards
+
+})
