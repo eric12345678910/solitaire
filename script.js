@@ -14,11 +14,11 @@ function suits(suit){
         {n: 'J', suit: suit, loc:''},
         {n: 'Q', suit: suit,loc:''},
         {n: 'K', suit: suit,loc:''},
-        )
+        );
     return cardSuit;
 }
 
-// Function to Create the Full Deck of Cards
+// Create the Full Deck of Cards
 let fullDeck = [
     ...suits('hearts'),
     ...suits('diamonds'),
@@ -26,15 +26,39 @@ let fullDeck = [
     ...suits('clubs')
 ];
 
-console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
+//console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
 
+// Add/update elements in html //////////////////////////////////////////////
+function addHtml(locationId){
+    //console.log(`\naddHtml(${locationId})...`);
 
-// Load after dom
+    // Filter cards that belong to the specified column
+    let cardLoc = fullDeck.filter(card => card.loc === locationId);
+    //console.log('Cards with location ID: ', locationId, '\n', cardLoc);
+
+    let locElement = document.querySelector(`#${locationId}`);
+
+    // Clear existing
+    if( locElement){
+        locElement.innerHTML = '';
+
+        cardLoc.forEach(card => {
+            let listItem = document.createElement('li');
+            listItem.textContent = `${card.n} of ${card.suit}`;
+            locElement.appendChild(listItem);
+        });
+    }
+}
+
+// AFTER DOM LOADED /////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Deal a new game
-    document.getElementById('shuffle').addEventListener('click', (id) => {
+    // Click Event //////////////////////////////////////////////////////////
+    // Shuffle a new game
+    document.getElementById('shuffle').addEventListener('click', () => {
         //alert('New Deck!');
+
+        // Create and shuffle numbers 1-52
         function shuffle(arr){
             for( let i = arr.length -1; i > 0; i--){
                 let j = Math.floor(Math.random() * (i + 1));
@@ -48,80 +72,43 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log('numbers: ', numbers);
 
         // Assign location data to each card element
+        // aka Deal Cards
         for(let i = 0; i < 52; i++){
-            // Assign cards to Foundation
-            if(i === 0){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col1';
-            }
-            if(i >= 1 && i <= 2){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col2';
-            }
-            if(i >= 3 && i <= 5 ){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col3';
-            }
-            if(i >= 6 && i <= 10){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col4';
-            }
-            if(i >= 10 && i <= 14){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col5';
-            }
-            if(i >= 15 && i <= 20){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col6';
-            }
-            if(i >= 21 && i <= 27){
-                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
-                fullDeck[numbers[i]].loc = 'col7';
-            }
-            else if(i >= 28){
-                fullDeck[numbers[i]].loc = 'stock';
-            }
+            // Assign cards to Columns 1-7 in Foundation
+            if(i === 0) fullDeck[numbers[i]].loc = 'col1';
+            else if(i >= 1 && i <= 2) fullDeck[numbers[i]].loc = 'col2';
+            else if(i >= 3 && i <= 5 ) fullDeck[numbers[i]].loc = 'col3';
+            else if(i >= 6 && i <= 9) fullDeck[numbers[i]].loc = 'col4';
+            else if(i >= 10 && i <= 14) fullDeck[numbers[i]].loc = 'col5';
+            else if(i >= 15 && i <= 20) fullDeck[numbers[i]].loc = 'col6';
+            else if(i >= 21 && i <= 27) fullDeck[numbers[i]].loc = 'col7';
+            else fullDeck[numbers[i]].loc = 'stock';
         }
 
+/*
         // Check card distribution
         let locCounts = fullDeck.reduce((counts, card) => {
             counts[card.loc] = (counts[card.loc] || 0) + 1;
             return counts;
         }, {});
 
-        console.log('Cards in each stack: ', locCounts);
-
+        console.log('Size of each stack of cards: ', locCounts);
         console.log('\nStarting Deck: ', fullDeck);
+*/
 
 
-        // Function to add/update elements in html
-        function addHtml(columnId){
-            console.log('updating html()...');
-
-            // Filter cards that belong to the specified column
-            let colCards = fullDeck.filter(card => card.loc === columnId);
-            console.log('Cards with column ID: ', columnId, '\n', colCards);
-
-
-            let colElement = document.querySelector(`#${columnId}`);
-
-            // Clear existing
-            colElement.innerHTML = '';
-
-            colCards.forEach(card => {
-                let listItem = document.createElement('li');
-                listItem.textContent = `${card.n} of ${card.suit}`;
-                colElement.appendChild(listItem);
-            });
-        }
-
-        let locations = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'/*, 'stock', 'spade', 'heart', 'club', 'diamond'*/];
-        locations.forEach(location => {
-            console.log('location: ', location);
-            addHtml(location);
-        });
         addHtml('col1');
-    });
+        addHtml('col2');
+        addHtml('col3');
+        addHtml('col4');
+        addHtml('col5');
+        addHtml('col6');
+        addHtml('col7');
 
+/*
+        ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'stock'].forEach(location => {
+            addHtml(location);
+        });*/
+    });
 });
 

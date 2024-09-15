@@ -1,3 +1,56 @@
 *{
     background-color: antiquewhite;
 }
+
+
+li{
+    list-style: none;
+    border: 1px black solid;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+#upperDeck{
+    display: flex;
+    background-color: lightblue;
+    flex-direction: row;
+}
+
+#tableau{
+    background-color: lightcoral;
+    display: flex;
+    flex-direction: row;
+
+}
+
+#col1{
+    color: red;
+    border: 2px dotted red;
+}
+#col2{
+    color: orange;
+    border: 2px dotted orange;
+}
+#col3{
+    color: green;
+    border: 2px dotted green;
+}
+#col4{
+    color: blue;
+    border: 2px dotted blue;
+}
+#col5{
+    color: indigo;
+    border: 2px dotted indigo;
+}
+#col6{
+    color: violet;
+    border: 2px dotted violet;
+}
+#col7{
+    color: black;
+    border: 2px dotted black;
+}
