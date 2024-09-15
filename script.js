@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Deal The Cards
 
     document.addEventListener('click', (id) => {
-        alert('New Deck!');
+        //alert('New Deck!');
         function shuffle(arr){
             for( let i = arr.length -1; i > 0; i--){
                 let j = Math.floor(Math.random() * (i + 1));
@@ -57,12 +57,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return arr;
         }
-        let numbers = [...Array(53).keys()]; // Create an array [0, 1, 2, ..., 52]
+        let numbers = [...Array(52).keys()]; // Create an array [0, 1, 2, ..., 52]
         shuffle(numbers);
-        console.log(numbers);
+
+        console.log('numbers: ', numbers);
+
+        // Assign location data to each card element
+        for(let i = 0; i < 52; i++){
+            // Assign cards to Foundation
+            if(i === 0){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col1';
+            }
+            if(i >= 1 && i <= 2){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col2';
+            }
+            if(i >= 3 && i <= 5 ){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col3';
+            }
+            if(i >= 6 && i <= 10){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col4';
+            }
+            if(i >= 10 && i <= 14){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col5';
+            }
+            if(i >= 15 && i <= 21){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col6';
+            }
+            if(i >= 22 && i <= 28){
+                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                fullDeck[numbers[i]].loc = 'col7';
+            }
+            else if(i >= 29){
+                fullDeck[numbers[i]].loc = 'stock';
+            }
+
+        }
 
 
-    });
+
+
+        console.log('fullDeck final: ', fullDeck);
+});
 
     let shuffle = document.getElementById('shuffle');
-})
+});
