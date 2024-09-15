@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addHtml('col5');
         addHtml('col6');
         addHtml('col7');
+        addHtml('stock');
 
 /*
         ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'stock'].forEach(location => {

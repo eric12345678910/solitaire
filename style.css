@@ -3,14 +3,25 @@
 }
 
 
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 200px;
+    background-color: lightgrey;
+}
+
 li{
-    list-style: none;
-    border: 1px black solid;
+    padding: 5px;
+    border-bottom: 1px solid lightgrey;
+
 }
 
 body{
     display: flex;
     flex-direction: column;
+    padding: 25px;
 }
 
 #upperDeck{
@@ -29,10 +40,18 @@ body{
 #col1{
     color: red;
     border: 2px dotted red;
+
 }
+
+
 #col2{
     color: orange;
     border: 2px dotted orange;
+}
+#col2:n-child{
+    color: red;
+    border: 2px dotted red;
+
 }
 #col3{
     color: green;
@@ -53,4 +72,10 @@ body{
 #col7{
     color: black;
     border: 2px dotted black;
+}
+
+#stock :not(:nth-child(1)){
+    color: orange;
+    background-color: orange;
+
 }
