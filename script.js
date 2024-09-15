@@ -45,37 +45,37 @@ document.addEventListener('DOMContentLoaded', () => {
         let numbers = [...Array(52).keys()]; // Create an array [0, 1, 2, ..., 52]
         shuffle(numbers);
 
-        console.log('numbers: ', numbers);
+        //console.log('numbers: ', numbers);
 
         // Assign location data to each card element
         for(let i = 0; i < 52; i++){
             // Assign cards to Foundation
             if(i === 0){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col1';
             }
             if(i >= 1 && i <= 2){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col2';
             }
             if(i >= 3 && i <= 5 ){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col3';
             }
             if(i >= 6 && i <= 10){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col4';
             }
             if(i >= 10 && i <= 14){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col5';
             }
             if(i >= 15 && i <= 20){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col6';
             }
             if(i >= 21 && i <= 27){
-                console.log('position: ', i, 'numbers[i]: ', numbers[i]);
+                //console.log('position: ', i, 'numbers[i]: ', numbers[i]);
                 fullDeck[numbers[i]].loc = 'col7';
             }
             else if(i >= 28){
@@ -89,31 +89,39 @@ document.addEventListener('DOMContentLoaded', () => {
             return counts;
         }, {});
 
-        console.log('locCounts: ', locCounts);
+        console.log('Cards in each stack: ', locCounts);
 
-        insert(fullDeck)
+        console.log('\nStarting Deck: ', fullDeck);
 
-        console.log('fullDeck final: ', fullDeck);
 
+        // Function to add/update elements in html
+        function addHtml(columnId){
+            console.log('updating html()...');
+
+            // Filter cards that belong to the specified column
+            let colCards = fullDeck.filter(card => card.loc === columnId);
+            console.log('Cards with column ID: ', columnId, '\n', colCards);
+
+
+            let colElement = document.querySelector(`#${columnId}`);
+
+            // Clear existing
+            colElement.innerHTML = '';
+
+            colCards.forEach(card => {
+                let listItem = document.createElement('li');
+                listItem.textContent = `${card.n} of ${card.suit}`;
+                colElement.appendChild(listItem);
+            });
+        }
+
+        let locations = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'/*, 'stock', 'spade', 'heart', 'club', 'diamond'*/];
+        locations.forEach(location => {
+            console.log('location: ', location);
+            addHtml(location);
+        });
+        addHtml('col1');
     });
 
 });
 
-
-// Insert function to add elements to html
-function insert(columnId) {
-    // Filter cards that belong to the specified column
-    let colCards = fullDeck.filter(card => card.loc === columnId);
-    let colElement = document.querySelector(`#${columnId}`);
-
-    // Clear existing
-    colElement.innerHTML = '';
-
-    colCards.forEach(card => {
-        let listItem = document.createElement('li');
-        listItem.textContent = `${card.n} of ${card.suit}`;
-        colElement.appendChild(listItem);
-    });
-
-
-};
