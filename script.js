@@ -3,17 +3,17 @@ console.log('Loading Solitaire . . . ');
 // Function to Create Cards of a Suit
 function suits(suit){
     // Start deck with an Ace
-    let cardSuit = [{n:'A', suit: suit, loc:''}];
+    let cardSuit = [{n:'A', suit: suit, loc:'', className:'cardDown'}];
 
     // Add cards 2 through 10
     for(let i = 2; i <= 10; i++){
-        cardSuit.push( {n: i, suit: suit, loc: ''});
+        cardSuit.push( {n: i, suit: suit, loc: '', className:'cardDown'});
     }
     // Add face cards
     cardSuit.push(
-        {n: 'J', suit: suit, loc:''},
-        {n: 'Q', suit: suit,loc:''},
-        {n: 'K', suit: suit,loc:''},
+        {n: 'J', suit: suit, loc:'', className:'cardDown'},
+        {n: 'Q', suit: suit,loc:'', className:'cardDown'},
+        {n: 'K', suit: suit,loc:'', className:'cardDown'},
         );
     return cardSuit;
 }
@@ -42,17 +42,26 @@ function addHtml(locationId){
     if( locElement){
         locElement.innerHTML = '';
 
-        cardLoc.forEach(card => {
-            let listItem = document.createElement('li');
-            listItem.textContent = `${card.n} of ${card.suit}`;
-            locElement.appendChild(listItem);
-        });
+        // Append li to each location category
+        cardLoc.forEach(((cardLoc, index) => {
+            console.log('cardLoc.forEach(cardLoc > cardLoc: ', cardLoc);
+            let newListItem = document.createElement('li');
+            if(index === 0){
+                newListItem.className = 'cardUp'
+            }
+            else{
+                newListItem.className = 'cardDown'
+            }
+
+            newListItem.textContent = `${cardLoc.n} of ${cardLoc.suit}`;
+            locElement.appendChild(newListItem);
+        }));
     }
 }
 
-// AFTER DOM LOADED /////////////////////////////////////////////////////////
+// DOM LOADED /////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', () => {
-
+    const locations = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'stock']
     // Click Event //////////////////////////////////////////////////////////
     // Shuffle a new game
     document.getElementById('shuffle').addEventListener('click', () => {
@@ -85,6 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
             else fullDeck[numbers[i]].loc = 'stock';
         }
 
+        locations.forEach(locationId => {
+            const list = document.querySelector(`#${locationId}`);
+
+            if(list){
+                const firstItem  = list.querySelector('li');
+
+                if(firstItem){
+                    firstItem.className = 'cardUp'
+                }
+            }
+        })
+
 /*
         // Check card distribution
         let locCounts = fullDeck.reduce((counts, card) => {
@@ -106,10 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addHtml('col7');
         addHtml('stock');
 
-/*
-        ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'stock'].forEach(location => {
-            addHtml(location);
-        });*/
+
     });
 });
 
