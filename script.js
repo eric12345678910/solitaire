@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const locations = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'stock']
     // Click Event //////////////////////////////////////////////////////////
     // Shuffle a new game
-    document.getElementById('shuffle').addEventListener('click', () => {
+    document.getElementById('newGame').addEventListener('click', () => {
         //alert('New Deck!');
 
         // Create and shuffle numbers 1-52
@@ -96,10 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         locations.forEach(locationId => {
             const list = document.querySelector(`#${locationId}`);
-
             if(list){
                 const firstItem  = list.querySelector('li');
-
                 if(firstItem){
                     firstItem.className = 'cardUp'
                 }
@@ -112,12 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             counts[card.loc] = (counts[card.loc] || 0) + 1;
             return counts;
         }, {});
-
-        console.log('Size of each stack of cards: ', locCounts);
-        console.log('\nStarting Deck: ', fullDeck);
 */
-
-
         addHtml('col1');
         addHtml('col2');
         addHtml('col3');
@@ -126,8 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
         addHtml('col6');
         addHtml('col7');
         addHtml('stock');
+    });
+});
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('nextCard').addEventListener('click', () => {
+        const stockList = document.getElementById('stock');
+        if (stockList){
+            const listItems = Array.from(stockList.getElementsByTagName('li'));
+            const itemsToMove = listItems.slice(0,3);
+            itemsToMove.forEach(item => stockList.removeChild(item));
+            itemsToMove.forEach(item => stockList.appendChild(item));
+        }
     });
 });
 
