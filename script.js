@@ -28,20 +28,12 @@ let fullDeck = [
 
 console.log('fullDeck of', fullDeck.length, 'cards:', fullDeck);
 
-// Insert function to add elements to html
-function insert(obj){
-    let col1 = document.getElementById('col1');
-    let newCol1 = document.createElement('li');
-    newCol1.textContent = fullDeck.filter(card => card.loc === 'col1');
-    console.log('newCol1: ', newCol1);
-}
 
 // Load after dom
 document.addEventListener('DOMContentLoaded', () => {
 
     // Deal a new game
-
-    document.addEventListener('click', (id) => {
+    document.getElementById('shuffle').addEventListener('click', (id) => {
         //alert('New Deck!');
         function shuffle(arr){
             for( let i = arr.length -1; i > 0; i--){
@@ -103,7 +95,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('fullDeck final: ', fullDeck);
 
+    });
+
 });
 
-    let shuffle = document.getElementById('shuffle');
-});
+
+// Insert function to add elements to html
+function insert(columnId) {
+    // Filter cards that belong to the specified column
+    let colCards = fullDeck.filter(card => card.loc === columnId);
+    let colElement = document.querySelector(`#${columnId}`);
+
+    // Clear existing
+    colElement.innerHTML = '';
+
+    colCards.forEach(card => {
+        let listItem = document.createElement('li');
+        listItem.textContent = `${card.n} of ${card.suit}`;
+        colElement.appendChild(listItem);
+    });
+
+
+};
