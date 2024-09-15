@@ -3,17 +3,17 @@ console.log('Loading Solitaire . . . ');
 // Function to Create Cards of a Suit
 function suits(suit){
     // Start deck with an Ace
-    let cardSuit = [{n:'A', suit: suit}];
+    let cardSuit = [{n:'A', suit: suit, loc:''}];
 
     // Add cards 2 through 10
     for(let i = 2; i <= 10; i++){
-        cardSuit.push( {n: i, suit: suit});
+        cardSuit.push( {n: i, suit: suit, loc: ''});
     }
     // Add face cards
     cardSuit.push(
-        {n: 'J', suit: suit},
-        {n: 'Q', suit: suit},
-        {n: 'K', suit: suit},
+        {n: 'J', suit: suit, loc:''},
+        {n: 'Q', suit: suit,loc:''},
+        {n: 'K', suit: suit,loc:''},
         )
     return cardSuit;
 }
